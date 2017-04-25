@@ -50,11 +50,14 @@ class QuickUnion {
     if (n === this.parent[n]) {
       return n;
     }
+    this._connectGrandparent(n);
     return this._root(this.parent[n]);
   }
 
-  _connectGrandparent() {
-
+  _connectGrandparent(node) {
+    let parent = this.parent[node];
+    let grandparent = this.parent[parent];
+    this.parent[node] = grandparent;
   }
 
 }
