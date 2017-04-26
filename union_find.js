@@ -81,3 +81,48 @@ console.log(quickUnion);
 console.log(`connected(4,9) should be true === ${quickUnion.connected(4,9)}`);
 console.log(`connected(2,0) should be false === ${quickUnion.connected(2,0)}`);
 console.log(`connected(1,6) should be true === ${quickUnion.connected(1,6)}`);
+
+
+// Interview Questions
+
+// Social network connectivity. Given a social network containing n members and a log file
+// containing m timestamps at which times pairs of members formed friendships, design an
+// algorithm to determine the earliest time at which all members are connected (i.e., every
+// member is a friend of a friend of a friend ... of a friend). Assume that the log file is
+// sorted by timestamp and that friendship is an equivalence relation. The running time
+// of your algorithm should be mlogn or better and use extra space proportional to n.
+
+// To solve this, I would definitely need my parent array with every parent initialized to
+// be itself. From there, I would go through the time logs and begin connecting by using the
+// union operator.
+
+// How would I know the earliest point at which all people were connected in the network? I could
+// probably branch off a little bit from the default union find pattern and create an additional set
+// that contains each root node. I would modify union so that when two values were unified, the previous
+// root of the smaller tree would be deleted from the set. I could then check the set's count, which I
+// assume is constant time because it should be storing a count instance variable. If the set's count
+// is greater than 1, we do not yet have every friend connected in our network.
+
+// here's the code I would add to my union set class in addition to the exisiting setup
+
+// this.rootNodes = new Set(this.parent)
+
+// then when we delete something:
+
+// this.rootNodes.delete(n);
+
+// then check the count:
+
+// if (this.rootNodes.count > 1) {
+//   return 'We're all connected';
+// }
+
+
+
+
+
+
+
+
+
+//
