@@ -85,6 +85,8 @@ console.log(`connected(1,6) should be true === ${quickUnion.connected(1,6)}`);
 
 // Interview Questions
 
+// 1.
+
 // Social network connectivity. Given a social network containing n members and a log file
 // containing m timestamps at which times pairs of members formed friendships, design an
 // algorithm to determine the earliest time at which all members are connected (i.e., every
@@ -116,6 +118,39 @@ console.log(`connected(1,6) should be true === ${quickUnion.connected(1,6)}`);
 // if (this.rootNodes.count > 1) {
 //   return 'We're all connected';
 // }
+
+
+
+
+// 2.
+
+// Union-find with specific canonical element. Add a method 𝚏𝚒𝚗𝚍() to the union-find data type so
+// that 𝚏𝚒𝚗𝚍(𝚒) returns the largest element in the connected component containing i. The operations,
+// 𝚞𝚗𝚒𝚘𝚗(), 𝚌𝚘𝚗𝚗𝚎𝚌𝚝𝚎𝚍(), and 𝚏𝚒𝚗𝚍() should all take logarithmic time or better.
+//
+// For example, if one of the connected components is {1,2,6,9}, then the 𝚏𝚒𝚗𝚍() method should
+// return 9 for each of the four elements in the connected components.
+
+// I think I'd solve this in a similar way to the above problem. I'd simply create an additional
+// array with the max value in any given set. From there, when I connected two trees, I'd compare
+// the two nodes to see if they were the different sizes and if they were, I'd replace the lower value's
+// node max with the higher value's max.
+
+
+
+
+
+// 3.
+
+
+
+
+
+
+
+
+
+
 
 
 
