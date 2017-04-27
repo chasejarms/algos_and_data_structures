@@ -140,11 +140,6 @@ console.log(`connected(1,6) should be true === ${quickUnion.connected(1,6)}`);
 
 
 
-// 3.
-
-
-
-
 
 
 
