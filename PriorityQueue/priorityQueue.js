@@ -135,26 +135,34 @@ class PriorityQueue {
       return;
     }
 
+    let numInfo = this.numberInfo[num];
     let max;
 
     if (children.length === 1) {
-      max = children[0];
+      max = this.numberInfo[children[0]];
     } else {
-      const childOne = this.heap[children[0]];
-      const childTwo = this.heap[children[1]];
-      max = Math.max(childOne, childTwo);
+      const childOneNum = this.heap[children[0]];
+      const childTwoNum = this.heap[children[1]];
+
+      const childOneInfo = this.numberInfo[childOneNum];
+      const childTwoInfo = this.numberInfo[childTwoNum];
+
+      if (childOneInfo.priority > childTwoInfo.priority) {
+        max = childOneInfo;
+      } else {
+        max = childTwoInfo;
+      }
     }
 
-    if (max > num) {
+    if (max.priority > numInfo.priority) {
+      const maxIndex = max.index;
 
-      const maxIndex = this.numberInfo[max].index;
 
-
-      this.heap[idx] = max;
+      this.heap[idx] = this.heap[max.index];
       this.heap[maxIndex] = num;
 
-      this.numberInfo[num].index = maxIndex;
-      this.numberInfo[max].index = idx;
+      numInfo.index = maxIndex;
+      max.index = idx;
 
       this._heapifyDown(num, maxIndex);
     }
@@ -169,6 +177,10 @@ class PriorityQueue {
     let secondIndex = (idx * 2) + 2;
 
     return [firstIndex, secondIndex];
+  }
+
+  _maxChildInfo(idx1, idx2) {
+    
   }
 }
 
