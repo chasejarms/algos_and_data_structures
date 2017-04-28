@@ -67,16 +67,21 @@ class PriorityQueue {
   _heapifyUp(num, idx) {
     let parentIndex = this._parentIndex(idx);
 
-    if (parentIndex > 0) {
+    if (parentIndex >= 0) {
 
-      let parentNum = this.heap[idx];
-      let parentInfo = this.numInfo[parentNum];
-      let childInfo = this.numInfo[idx];
+      let parentNum = this.heap[parentIndex];
+      let parentInfo = this.numberInfo[parentNum];
+      let childInfo = this.numberInfo[num];
 
       if (parentInfo.priority < childInfo.priority) {
 
         this.heap[idx] = parentNum;
         this.heap[parentIndex] = num;
+
+        parentInfo.index = idx;
+        childInfo.index = parentIndex;
+
+        this._heapifyUp(num, parentIndex);
       }
     }
   }
@@ -93,18 +98,7 @@ class PriorityQueue {
     let firstIndex = (idx * 2) + 1;
     let secondIndex = (idx * 2) + 2;
 
-    // to account for zero as a falsey value
-    // we need to check for undefined instead
-
-    if (firstChild !== undefined && secondChild !== undefined) {
-      return [firstChild, secondChild];
-    } else if (firstChild !== undefined) {
-      return [firstChild];
-    } else if (secondChild !== undefined) {
-      return [secondChild];
-    } else {
-      return undefined;
-    }
+    return [firstIndex, secondIndex];
   }
 }
 
