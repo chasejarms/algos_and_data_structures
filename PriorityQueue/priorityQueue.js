@@ -98,7 +98,7 @@ class PriorityQueue {
 
     if (firstChild !== undefined && secondChild !== undefined) {
       return [firstChild, secondChild];
-    } else if (firstChild !=== undefined) {
+    } else if (firstChild !== undefined) {
       return [firstChild];
     } else if (secondChild !== undefined) {
       return [secondChild];
@@ -108,4 +108,4 @@ class PriorityQueue {
   }
 }
 
-// consider implementing jest tests
+module.exports = PriorityQueue;

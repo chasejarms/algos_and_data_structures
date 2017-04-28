@@ -1,0 +1,15 @@
+{
+  "name": "priorityQueue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest-cli": "^19.0.2"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
