@@ -1,6 +1,7 @@
 const PriorityQueue = require('./priorityQueue');
 
 const priorityQueue = new PriorityQueue();
+const priorityQueueTwo = new PriorityQueue();
 
 describe('new PriorityQueue()', () => {
 
@@ -90,3 +91,42 @@ describe('insert', () => {
     expect(priorityQueue.heap).toEqual([49,11,50,5,9,3,12]);
   });
 });
+
+describe('remove', () => {
+  it ('does nothing if the value is not in the priority queue', () => {
+    expect(priorityQueueTwo.remove(10)).toEqual(undefined);
+  });
+
+  it ('pops off the last item if one the heap size is 1', () => {
+    priorityQueueTwo.insert(5);
+    expect(priorityQueueTwo.remove(5)).toEqual(5);
+    expect(priorityQueueTwo.heap).toEqual([]);
+  });
+
+  it ('gets rid of the number Info for that number', () => {
+    expect(priorityQueueTwo.numberInfo).toEqual({});
+  });
+
+  it ('handles bigger changes', () => {
+    priorityQueue.insert(68);
+    priorityQueue.insert(34);
+    priorityQueue.insert(21);
+    priorityQueue.insert(13);
+    priorityQueue.insert(-1);
+    priorityQueue.insert(86);
+    priorityQueue.insert(72);
+    priorityQueue.remove(72);
+    expect(priorityQueue.heap).toEqual([86,49,68,34,21,50,12,5,11,9,13,-1,3]);
+    priorityQueue.remove(49);
+    expect(priorityQueue.heap).toEqual([86,34,68,11,21,50,12,5,3,9,13,-1]);
+    priorityQueue.insert(25);
+    priorityQueue.remove(5);
+    expect(priorityQueue.heap).toEqual([86,34,68,25,21,50,12,11,3,9,13,-1]);
+  });
+
+  it ('removes the number from the number info', () => {
+    expect(priorityQueue.numberInfo[72]).toBeUndefined();
+    expect(priorityQueue.numberInfo[49]).toBeUndefined();
+    expect(priorityQueue.numberInfo[5]).toBeUndefined();
+  })
+})

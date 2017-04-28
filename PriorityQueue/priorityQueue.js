@@ -1,5 +1,7 @@
 /*
 
+Instructions:
+
 The queue must have an insert method which takes a number.
 
 If the number is not already present in the queue,
@@ -19,6 +21,8 @@ Please don't pull in any external libraries.
 
 
 /*
+
+Thoughts:
 
 One thing to note here is that if we don't add in a hash
 in addition to the heap, we will only be able to find if
@@ -43,7 +47,8 @@ class PriorityQueue {
       numInfo.priority = oldPriority + 1;
 
       // after adding one to the priority, we need to see if we would need to
-      // heapify up (assuming these are sorted based on priority)
+      // heapify up (assuming these are sorted based on priority and not initial
+      // number )
 
       this._heapifyUp(num, numInfo.index);
     } else {
@@ -61,7 +66,42 @@ class PriorityQueue {
   }
 
   remove(num) {
+    const lastValue = this.heap.pop();
+    const numInfo = this.numberInfo[num];
 
+    // account for the case that we have not yet defined that
+    // number or we don't have anything in our heap
+
+    if (!lastValue || !numInfo) {
+      return undefined;
+    }
+
+    // account for our heap having just one value
+    // (zero now that we popped off the last value)
+
+    if (this.heap.length === 0) {
+      delete this.numberInfo[lastValue];
+      return lastValue;
+    }
+
+    // first we switch the target value and the last value
+    // in our heap and reassign the index of the last value
+    // to be the target value's previous index
+
+    const lastValueInfo = this.numberInfo[lastValue];
+    const targetIndex = numInfo.index;
+
+    this.heap[targetIndex] = lastValue;
+    lastValueInfo.index = targetIndex;
+
+    // then delete the target value
+
+    delete this.numberInfo[num];
+
+    this._heapifyUp(this.heap[targetIndex], targetIndex);
+    this._heapifyDown(this.heap[targetIndex], targetIndex);
+
+    return num;
   }
 
   _heapifyUp(num, idx) {
@@ -86,8 +126,38 @@ class PriorityQueue {
     }
   }
 
-  _heapifyDown(idx) {
+  _heapifyDown(num, idx) {
+    const children = this._childIndices(idx).filter(index => {
+      return index < this.heap.length;
+    });
 
+    if (children.length === 0) {
+      return;
+    }
+
+    let max;
+
+    if (children.length === 1) {
+      max = children[0];
+    } else {
+      const childOne = this.heap[children[0]];
+      const childTwo = this.heap[children[1]];
+      max = Math.max(childOne, childTwo);
+    }
+
+    if (max > num) {
+
+      const maxIndex = this.numberInfo[max].index;
+
+
+      this.heap[idx] = max;
+      this.heap[maxIndex] = num;
+
+      this.numberInfo[num].index = maxIndex;
+      this.numberInfo[max].index = idx;
+
+      this._heapifyDown(num, maxIndex);
+    }
   }
 
   _parentIndex(idx) {
