@@ -80,11 +80,6 @@ class PriorityQueue {
       return lastValue;
     }
 
-    // set the last value as the head (done)
-    // set the new index on the numberInfo for that value (done)
-    // delete the number info for the popped off value (done)
-    // heapify down with the the new root value
-
     this.heap[0] = lastValue;
     this.numberInfo[lastValue].index = 0;
     this._heapifyDown(this.heap[0], 0);
