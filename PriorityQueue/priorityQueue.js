@@ -136,34 +136,17 @@ class PriorityQueue {
     }
 
     let numInfo = this.numberInfo[num];
-    let max;
+    let maxInfo;
 
     if (children.length === 1) {
-      max = this.numberInfo[children[0]];
+      maxInfo = this.numberInfo[children[0]];
     } else {
-      const childOneNum = this.heap[children[0]];
-      const childTwoNum = this.heap[children[1]];
-
-      const childOneInfo = this.numberInfo[childOneNum];
-      const childTwoInfo = this.numberInfo[childTwoNum];
-
-      if (childOneInfo.priority > childTwoInfo.priority) {
-        max = childOneInfo;
-      } else {
-        max = childTwoInfo;
-      }
+      maxInfo = this._maxChildInfo(children[0], children[1]);
     }
 
-    if (max.priority > numInfo.priority) {
-      const maxIndex = max.index;
-
-
-      this.heap[idx] = this.heap[max.index];
-      this.heap[maxIndex] = num;
-
-      numInfo.index = maxIndex;
-      max.index = idx;
-
+    if (maxInfo.priority > numInfo.priority) {
+      const maxIndex = maxInfo.index;
+      this._swapValues(maxInfo, numInfo, num, maxIndex);
       this._heapifyDown(num, maxIndex);
     }
   }
@@ -180,7 +163,27 @@ class PriorityQueue {
   }
 
   _maxChildInfo(idx1, idx2) {
-    
+    const childOneNum = this.heap[idx1];
+    const childTwoNum = this.heap[idx2];
+
+    const childOneInfo = this.numberInfo[childOneNum];
+    const childTwoInfo = this.numberInfo[childTwoNum];
+
+    if (childOneInfo.priority > childTwoInfo.priority) {
+      return childOneInfo;
+    } else {
+      return childTwoInfo;
+    }
+  }
+
+  _swapValues(maxInfo, numInfo, num, maxIndex) {
+    const idx = numInfo.index;
+
+    this.heap[idx] = this.heap[maxInfo.index];
+    this.heap[maxIndex] = num;
+
+    numInfo.index = maxIndex;
+    maxInfo.index = idx;
   }
 }
 
