@@ -65,43 +65,31 @@ class PriorityQueue {
     }
   }
 
-  remove(num) {
-    const lastValue = this.heap.pop();
-    const numInfo = this.numberInfo[num];
+  remove() {
+    const heapLength = this.heap.length;
 
-    // account for the case that we have not yet defined that
-    // number or we don't have anything in our heap
-
-    if (!lastValue || !numInfo) {
+    if (heapLength === 0) {
       return undefined;
     }
 
-    // account for our heap having just one value
-    // (zero now that we popped off the last value)
+    const firstValue = this.heap[0];
+    const lastValue = this.heap.pop();
+    delete this.numberInfo[firstValue];
 
-    if (this.heap.length === 0) {
-      delete this.numberInfo[lastValue];
+    if (heapLength === 1) {
       return lastValue;
     }
 
-    // first we switch the target value and the last value
-    // in our heap and reassign the index of the last value
-    // to be the target value's previous index
+    // set the last value as the head (done)
+    // set the new index on the numberInfo for that value (done)
+    // delete the number info for the popped off value (done)
+    // heapify down with the the new root value
 
-    const lastValueInfo = this.numberInfo[lastValue];
-    const targetIndex = numInfo.index;
+    this.heap[0] = lastValue;
+    this.numberInfo[lastValue].index = 0;
+    this._heapifyDown(this.heap[0], 0);
 
-    this.heap[targetIndex] = lastValue;
-    lastValueInfo.index = targetIndex;
-
-    // then delete the target value
-
-    delete this.numberInfo[num];
-
-    this._heapifyUp(this.heap[targetIndex], targetIndex);
-    this._heapifyDown(this.heap[targetIndex], targetIndex);
-
-    return num;
+    return firstValue;
   }
 
   _heapifyUp(num, idx) {
