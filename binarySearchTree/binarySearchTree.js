@@ -6,35 +6,37 @@ function BinarySearchTree() {
 
 BinarySearchTree.prototype.push = function(value) {
 
-  if (!this.root) {
+  let currentNode = this.root;
+  if (!currentNode) {
     this.root = new Node(value);
     return;
   }
 
-  const currentNode = this.root;
   const newNode = new Node(value);
 
   while (currentNode) {
 
-    if (newNode.value < currentNode.value) {
+    if (newNode.value <= currentNode.value) {
 
-      if (!currentNode.left) {
+      if (currentNode.left) {
+        currentNode = currentNode.left;
+      } else {
         currentNode.left = newNode;
         break;
-      } else {
-        currentNode = currentNode.left;
       }
 
-    } else if (newNode.value >= currentNode.value) {
+    } else {
 
-      if (!currentNode.right) {
+      if (currentNode.right) {
+        currentNode = currentNode.right;
+      } else {
         currentNode.right = newNode;
         break;
-      } else {
-        currentNode = currentNode.right;
       }
 
     }
 
   }
 }
+
+module.exports = BinarySearchTree;
