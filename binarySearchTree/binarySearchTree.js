@@ -66,4 +66,29 @@ BinarySearchTree.prototype.breadthFirstSearch = function(val) {
   return null;
 }
 
+BinarySearchTree.prototype.breadthFirstOrder = function() {
+  const order = [];
+  const queue = [];
+
+  if (this.root) {
+    queue.push(this.root);
+  }
+
+  while (queue.length > 0) {
+    let currentNode = queue.shift();
+
+    order.push(currentNode.value);
+
+    if (currentNode.left) {
+      queue.push(currentNode.left);
+    }
+
+    if (currentNode.right) {
+      queue.push(currentNode.right);
+    }
+  }
+
+  return order;
+}
+
 module.exports = BinarySearchTree;

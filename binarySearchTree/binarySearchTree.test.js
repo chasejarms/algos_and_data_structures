@@ -50,3 +50,9 @@ describe('breadthFirstSearch', () => {
     expect(binarySearchTreeTwo.breadthFirstSearch(54)).toBeNull();
   });
 });
+
+describe('breadthFirstOrder', () => {
+  it('gives back the correct order', () => {
+    expect(binarySearchTreeTwo.breadthFirstOrder()).toEqual([10,5,15,3,8,13,18]);
+  });
+})
