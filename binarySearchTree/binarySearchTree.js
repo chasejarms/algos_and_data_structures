@@ -91,4 +91,22 @@ BinarySearchTree.prototype.breadthFirstOrder = function() {
   return order;
 }
 
+BinarySearchTree.prototype.depthFirstOrder = function() {
+  const stack = [];
+  const order = [];
+
+  // push and pop
+
+  if (this.root) {
+    // push the root onto the stack
+
+    stack.push(this.root);
+  }
+
+  // traverse the tree
+
+  while(stack.length > 0) {
+  }
+}
+
 module.exports = BinarySearchTree;
