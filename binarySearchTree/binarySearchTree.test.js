@@ -56,3 +56,21 @@ describe('breadthFirstOrder', () => {
     expect(binarySearchTreeTwo.breadthFirstOrder()).toEqual([10,5,15,3,8,13,18]);
   });
 });
+
+describe('preorderTraversal', () => {
+  it('gives back the correct order', () => {
+    expect(binarySearchTreeTwo.preOrderTraversal()).toEqual([10,5,3,8,15,13,18]);
+  });
+});
+
+describe('postOrderTraversal', () => {
+  it('gives back the correct order', () => {
+    expect(binarySearchTreeTwo.postOrderTraversal()).toEqual([3,8,5,13,18,15,10]);
+  });
+});
+
+describe('inOrderTraversal', () => {
+  it('gives back the correct order', () => {
+    expect(binarySearchTreeTwo.inOrderTraversal()).toEqual([3,5,8,10,13,15,18]);
+  });
+})

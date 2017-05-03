@@ -91,22 +91,65 @@ BinarySearchTree.prototype.breadthFirstOrder = function() {
   return order;
 }
 
-BinarySearchTree.prototype.depthFirstOrder = function() {
-  const stack = [];
-  const order = [];
+BinarySearchTree.prototype.preOrderTraversal = function(currentNode) {
+  let nodes = [];
 
-  // push and pop
-
-  if (this.root) {
-    // push the root onto the stack
-
-    stack.push(this.root);
+  if (currentNode === undefined) {
+    currentNode = this.root;
   }
 
-  // traverse the tree
+  // accounts for the case where there is no current node
+  // or where we haven't established a root node yet
 
-  while(stack.length > 0) {
+  if (currentNode === null) {
+    return nodes;
   }
+
+  nodes.push(currentNode.value);
+  let leftNodes = this.preOrderTraversal(currentNode.left);
+  let rightNodes = this.preOrderTraversal(currentNode.right);
+
+  return nodes.concat(leftNodes, rightNodes);
+}
+
+BinarySearchTree.prototype.postOrderTraversal = function(currentNode) {
+  let nodes = [];
+
+  if (currentNode === undefined) {
+    currentNode = this.root;
+  }
+
+  if (currentNode === null) {
+    return nodes;
+  }
+
+  let leftNodes = this.postOrderTraversal(currentNode.left);
+  let rightNodes = this.postOrderTraversal(currentNode.right);
+  nodes.push(currentNode.value);
+
+  return leftNodes.concat(rightNodes, nodes);
+}
+
+BinarySearchTree.prototype.inOrderTraversal = function(currentNode) {
+  let nodes = [];
+
+  if (currentNode === undefined) {
+    currentNode = this.root;
+  }
+
+  if (currentNode === null) {
+    return nodes;
+  }
+
+  let leftNodes = this.inOrderTraversal(currentNode.left);
+  nodes.push(currentNode.value);
+  let rightNodes = this.inOrderTraversal(currentNode.right);
+
+  return leftNodes.concat(nodes, rightNodes);
+}
+
+BinarySearchTree.prototype.kthSmallestElement = function(num) => {
+  
 }
 
 module.exports = BinarySearchTree;
