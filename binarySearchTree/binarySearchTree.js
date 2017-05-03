@@ -148,8 +148,22 @@ BinarySearchTree.prototype.inOrderTraversal = function(currentNode) {
   return leftNodes.concat(nodes, rightNodes);
 }
 
-BinarySearchTree.prototype.kthSmallestElement = function(num) => {
-  
+BinarySearchTree.prototype.lcm = function(val1, val2) {
+  let currentNode = this.root;
+
+  if (currentNode === null) {
+    return undefined;
+  }
+
+  if (currentNode.value === val1) {
+    return currentNode.value;
+  } else if (currentNode.value === val2) {
+    return currentNode.value;
+  }
+
+  if (currentNode.value > val1 && currentNode.value < val2) {
+    
+  }
 }
 
 module.exports = BinarySearchTree;
