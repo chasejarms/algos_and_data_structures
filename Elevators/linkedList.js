@@ -25,9 +25,6 @@ class LinkedList {
     const prevNode = node.prev;
     const nextNode = node.next;
 
-    console.log(prevNode);
-    console.log(nextNode);
-
     // if the node is the only node in
     // our linked list
     if (!prevNode && !nextNode) {
