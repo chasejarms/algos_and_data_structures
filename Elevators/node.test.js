@@ -11,5 +11,6 @@ describe('Node', () => {
 
   it('initializes with a value', () => {
     expect(nodeOne.elevator).toBe(elevatorOne);
+    expect(nodeOne instanceof Node).toBeTruthy();
   });
 });
