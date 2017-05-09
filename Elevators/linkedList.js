@@ -2,6 +2,7 @@ class LinkedList {
   constructor() {
     this.head = undefined;
     this.tail = undefined;
+    this.length = 0;
   }
 
   append(node) {
@@ -18,6 +19,8 @@ class LinkedList {
       node.prev = this.tail;
       this.tail = node;
     }
+
+    this.length += 1;
 
   }
 
@@ -61,7 +64,7 @@ class LinkedList {
 
     // finally, reset the node so that we don't
     // have to create it again each time
-
+    this.length -= 1;
     return this._resetNode(node);
   }
 

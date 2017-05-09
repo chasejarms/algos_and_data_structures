@@ -55,4 +55,12 @@ describe('LinkedList', () => {
     expect(thirdNode.prev).toBeFalsy();
     expect(thirdNode.next).toBeFalsy();
   });
+
+  it('keeps track of length', () => {
+    expect(linkedList.length).toBe(0);
+    linkedList.append(firstNode);
+    linkedList.append(secondNode);
+    linkedList.append(thirdNode);
+    expect(linkedList.length).toBe(3);
+  });
 });

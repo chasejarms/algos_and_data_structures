@@ -11,6 +11,10 @@ class ElevatorController {
     this._setElevators(numElevators);
   }
 
+  requestElevator(floor) {
+    
+  }
+
   _createFloors(numFloors) {
     const floors = [];
     for (let i = 0; i < numFloors; i++) {
