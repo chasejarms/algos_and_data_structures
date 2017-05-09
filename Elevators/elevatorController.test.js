@@ -11,5 +11,7 @@ describe('ElevatorController', () => {
       expect(unoccupiedElevators[i] instanceof LinkedList).toBeTruthy()
       expect(occupiedElevators[i] instanceof LinkedList).toBeTruthy()
     }
-  })
+  });
+
+  
 });
